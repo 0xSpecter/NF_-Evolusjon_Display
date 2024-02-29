@@ -42,7 +42,7 @@ export default function Home() {
                 </span>
             </div>
             <Suspense fallback={<div>Loading...</div>}>
-                <div className="relative w-2/3 flex flex-col items-center bg-white text-black rounded-lg">
+                <div className="relative w-2/3 flex flex-col items-center bg-white text-black rounded-lg mb-16">
                     {(data && questions) && 
                         questions.map((question, index) => {
                             return (
@@ -70,8 +70,10 @@ function Block({index, question, data}) {
 
     return (
         <div className='relative w-full min-h-[200px] px-16 py-8 flex flex-col gap-5'>
-            <span className='text-lg px-1 h-1/3'>
+            <span className='relative text-lg px-1 h-1/3'>
                 {index}. {question}
+
+                <span className='absolute -bottom-2 left-10 origin-center w-1/3 h-[2px] bg-cyan-400/60 ' />
             </span>
             <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
                 <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
@@ -93,7 +95,7 @@ function Block({index, question, data}) {
                     </motion.button>
                 </div>
 
-                <div className='w-2/3 text-center'>
+                <div className='w-2/3 h-full text-center flex items-center justify-center'>
                     {data[aindex][question]}
                 </div>
             </div>
@@ -102,9 +104,7 @@ function Block({index, question, data}) {
                 initial={{ width: 0 }}
                 whileInView={{ width: "90%" }}
                 transition={{ duration: 0.5 }}
-            >
-
-            </motion.span>
+            />
         </div>
     )
 }
