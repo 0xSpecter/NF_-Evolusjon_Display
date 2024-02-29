@@ -6,4 +6,4 @@ Denne siden formaterer og viser disse svarende ;\)
 ---
 
 ### Siden ligger på 
-## <a href="https://nfdatabreach.vercel.app">  Nf Databreach </a>  
+## <a href="https://nfdatabreach.vercel.app" target="_blank">  Nf Databreach </a>  
