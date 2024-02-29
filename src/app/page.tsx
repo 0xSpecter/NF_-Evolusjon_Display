@@ -50,13 +50,13 @@ export default function Home() {
                                 <span className='h-20 w-1/2 bg-gray-500 animate-pulse'/>
 
                             </span>
-                            <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
+                            <div className="relative flex flex-row jusitfy-start w-full h-2/3">
                                 <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
                                     <div className='w-10 h-10 rounded-full bg-gray-500 animate-pulse'/>
                                     <div className='w-10 h-10 rounded-full bg-gray-500 animate-pulse'/>
                                 </div>
                 
-                                <div className='w-2/3 h-full flex items-center justify-center flex-grow'>
+                                <div className='w-2/3 h-full flex items-center justify-center'>
                                     <div className=' bg-gray-400 animate-pulse flex-grow w-60 h-40'/>
                                 </div>
                             </div>
@@ -83,6 +83,7 @@ function Doc({ data, questions }) {
                                 key={index}
                                 index={index + 1}
                                 question={question}
+                                totalQuestions={questions.length}
                                 data={data}
                             />
                         )
@@ -93,15 +94,11 @@ function Doc({ data, questions }) {
     )
 }
 
-function Block({index, question, data}) {
+function Block({index, question, data, totalQuestions}) {
     const [aindex, setAindex] = useState(0);
 
-    useEffect(() => {
-        console.log(data[aindex], aindex)
-    }, [aindex])
-
     return (
-        <div className='relative w-full min-h-[200px] px-16 py-8 flex flex-col gap-5'>
+        <div className='relative w-full min-h-[200px] h-fit px-16 py-8 flex flex-col gap-5'>
             <span className='relative text-lg px-1 h-1/3'>
                 {index}. {question}
 
@@ -111,7 +108,7 @@ function Block({index, question, data}) {
                     transition={{ duration: 0.5 }}
                 />
             </span>
-            <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
+            <div className="relative flex flex-row w-full h-2/3">
                 <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
                     <motion.button className="w-10 h-10 disabled:opacity-60"
                         whileHover={aindex != 0 ? {scale: 1.06} : {rotate: 10}}
@@ -131,16 +128,18 @@ function Block({index, question, data}) {
                     </motion.button>
                 </div>
 
-                <div className='w-2/3 h-full text-center flex items-center justify-center'>
+                <div className='w-2/3 h-full text-center flex flex-grow flex-1 items-center justify-center'>
                     {data[aindex][question]}
                 </div>
             </div>
 
-            <motion.span className='absolute bottom-0 left-1/2 -translate-x-1/2 origin-center w-4/5 h-[2px] bg-gray-500/50'
-                initial={{ width: 0, opacity: 0 }}
-                whileInView={{ width: "90%", opacity: 1 }}
-                transition={{ duration: 0.5 }}
-            />
+            { index != totalQuestions &&
+                <motion.span className='absolute bottom-0 left-1/2 -translate-x-1/2 origin-center w-4/5 h-[2px] bg-gray-500/50'
+                    initial={{ width: 0, opacity: 0 }}
+                    whileInView={{ width: "90%", opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                />
+            }
         </div>
     )
 }
