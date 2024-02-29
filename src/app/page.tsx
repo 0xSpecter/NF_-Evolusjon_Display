@@ -75,22 +75,22 @@ function Block({index, question, data}) {
             </span>
             <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
                 <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
-                    <motion.div className="w-10 h-10"
-                        whileHover={{ scale: 1.06 }}
-                        transition={{ duration: 0.2, ease: "circInOut" }}
-
+                    <motion.button className="w-10 h-10 disabled:opacity-60"
+                        whileHover={aindex != 0 ? {scale: 1.06} : {rotate: 10}}
+                        whileTap={aindex != 0 ? {scale: 0.9} : {rotate: -10}}
+                        disabled={aindex == 0}
                         onClick={() => aindex > 0 && setAindex(prev => prev - 1)}
                     >
-                        <img src="/arrow_button.svg" alt="previus" className='' />
-                    </motion.div>
-                    <motion.div className="w-10 h-10"
-                        whileHover={{ scale: 1.06 }}
-                        transition={{ duration: 0.2, ease: "circInOut" }}
-
+                        <img src="/arrow_button.svg" alt="previus" className='-rotate-90' />
+                    </motion.button>
+                    <motion.button className="w-10 h-10 disabled:opacity-50"
+                        whileHover={aindex != data.length - 1 ? {scale: 1.06} : {rotate: 10}}
+                        whileTap={aindex != data.length - 1 ? {scale: 0.9} : {rotate: -10}}
+                        disabled={aindex == data.length - 1}
                         onClick={() => aindex < data.length - 1 && setAindex(prev => prev + 1)}
                     >
-                        <img src="/arrow_button.svg" alt="next" className='rotate-180' />
-                    </motion.div>
+                        <img src="/arrow_button.svg" alt="next" className='rotate-90' />
+                    </motion.button>
                 </div>
 
                 <div className='w-2/3 text-center'>
