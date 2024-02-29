@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 export default function Home() {
     const [data, setData] = useState(null);
     const [questions, setQuestions] = useState([]);
-    const [aindex, setAindex] = useState(0);
 
     useEffect(() => {
         fetch("/data.csv").then((response) => {
@@ -31,7 +30,7 @@ export default function Home() {
                     ].includes(value)
                 )))
             });
-        });
+        })
     }, [])
 
     return (
@@ -41,24 +40,57 @@ export default function Home() {
                     Naturfag - Kap 5: Arv og Evolusjon
                 </span>
             </div>
-            <Suspense fallback={<div>Loading...</div>}>
+            { data && questions ? (
+                <Doc data={data} questions={questions}/>
+            ) : (
                 <div className="relative w-2/3 flex flex-col items-center bg-white text-black rounded-lg mb-16">
-                    {(data && questions) && 
-                        questions.map((question, index) => {
-                            return (
-                                <Block 
-                                    key={index}
-                                    index={index + 1}
-                                    question={question}
-                                    data={data}
-                                />
-                            )
-                        })
-                    }
+                    { Array(5).fill(1).map((_, index) => (
+                        <div key={index} className='relative w-full min-h-[200px] px-16 py-8 flex flex-col gap-5'>
+                            <span className='relative text-lg px-1 h-1/3'>
+                                <span className='h-20 w-1/2 bg-gray-500 animate-pulse'/>
+
+                            </span>
+                            <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
+                                <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
+                                    <div className='w-10 h-10 rounded-full bg-gray-500 animate-pulse'/>
+                                    <div className='w-10 h-10 rounded-full bg-gray-500 animate-pulse'/>
+                                </div>
+                
+                                <div className='w-2/3 h-full flex items-center justify-center flex-grow'>
+                                    <div className=' bg-gray-400 animate-pulse flex-grow w-60 h-40'/>
+                                </div>
+                            </div>
+                
+                            <motion.span className='absolute bottom-0 left-1/2 -translate-x-1/2 origin-center w-4/5 h-[1px] bg-gray-500 animate-pulse'
+                                transition={{ duration: 0.5 }}
+                            />
+                        </div>
+                    ))}
                 </div>
-            </Suspense>
+            )}
         </main>
     );
+}
+
+function Doc({ data, questions }) {
+    return (
+        <>
+            {(data && questions) &&
+                <div className="relative w-2/3 flex flex-col items-center bg-white text-black rounded-lg mb-16">
+                    {questions.map((question, index) => {
+                        return (
+                            <Block 
+                                key={index}
+                                index={index + 1}
+                                question={question}
+                                data={data}
+                            />
+                        )
+                    })}
+                </div>
+            }
+        </>
+    )
 }
 
 function Block({index, question, data}) {
@@ -73,7 +105,11 @@ function Block({index, question, data}) {
             <span className='relative text-lg px-1 h-1/3'>
                 {index}. {question}
 
-                <span className='absolute -bottom-2 left-10 origin-center w-1/3 h-[2px] bg-cyan-400/60 ' />
+                <motion.span className='absolute -bottom-2 left-10 origin-center w-1/3 h-[2px] bg-cyan-400/60 ' 
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: "33%", opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                />
             </span>
             <div className="realtive flex flex-row jusitfy-start w-full h-2/3">
                 <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
@@ -101,8 +137,8 @@ function Block({index, question, data}) {
             </div>
 
             <motion.span className='absolute bottom-0 left-1/2 -translate-x-1/2 origin-center w-4/5 h-[2px] bg-gray-500/50'
-                initial={{ width: 0 }}
-                whileInView={{ width: "90%" }}
+                initial={{ width: 0, opacity: 0 }}
+                whileInView={{ width: "90%", opacity: 1 }}
                 transition={{ duration: 0.5 }}
             />
         </div>
