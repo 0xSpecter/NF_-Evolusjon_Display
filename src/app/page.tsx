@@ -76,7 +76,7 @@ function Doc({ data, questions }) {
     return (
         <>
             {(data && questions) &&
-                <div className="relative w-2/3 flex flex-col items-center bg-white text-black rounded-lg mb-16">
+                <div className="relative md:w-2/3 w-3/4 flex flex-col items-center bg-white text-black rounded-lg mb-16">
                     {questions.map((question, index) => {
                         return (
                             <Block 
@@ -98,8 +98,8 @@ function Block({index, question, data, totalQuestions}) {
     const [aindex, setAindex] = useState(0);
 
     return (
-        <div className='relative w-full min-h-[200px] h-fit px-16 py-8 flex flex-col gap-5'>
-            <span className='relative text-lg px-1 h-1/3'>
+        <div className='relative w-full min-h-[200px] h-fit md:px-16 px-8 md:py-8 py-4 flex flex-col gap-5'>
+            <span className='relative text-lg md:px-1 h-1/3'>
                 {index}. {question}
 
                 <motion.span className='absolute -bottom-2 left-10 origin-center w-1/3 h-[2px] bg-cyan-400/60 ' 
@@ -109,7 +109,7 @@ function Block({index, question, data, totalQuestions}) {
                 />
             </span>
             <div className="relative flex flex-row w-full h-2/3">
-                <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center pr-10'>
+                <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center sm:pr-10 pr-14'>
                     <motion.button className="w-10 h-10 disabled:opacity-60"
                         whileHover={aindex != 0 ? {scale: 1.06} : {rotate: 10}}
                         whileTap={aindex != 0 ? {scale: 0.9} : {rotate: -10}}
