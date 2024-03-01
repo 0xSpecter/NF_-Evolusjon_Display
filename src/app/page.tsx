@@ -109,7 +109,7 @@ function Block({index, question, data, totalQuestions}) {
                 />
             </span>
             <div className="relative flex flex-row w-full h-2/3">
-                <div className='w-1/3 h-32 flex sm:flex-row flex-col gap-4 items-center justify-center sm:pr-10 pr-14'>
+                <div className='w-[27%] h-32 flex sm:flex-row flex-col gap-4 items-center justify-center sm:pr-10 pr-14'>
                     <motion.button className="w-10 h-10 disabled:opacity-60"
                         whileHover={aindex != 0 ? {scale: 1.06} : {rotate: 10}}
                         whileTap={aindex != 0 ? {scale: 0.9} : {rotate: -10}}
@@ -128,7 +128,7 @@ function Block({index, question, data, totalQuestions}) {
                     </motion.button>
                 </div>
 
-                <div className='w-2/3 h-full text-center flex flex-grow flex-1 items-center justify-center'>
+                <div className='w-[73%] h-full text-center flex flex-grow flex-1 items-center justify-center'>
                     {data[aindex][question]}
                 </div>
             </div>
